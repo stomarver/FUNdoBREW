@@ -1,0 +1,57 @@
+# Third-party notices
+
+FUNdoBREW itself is distributed under the Apache License 2.0; see [`License`](License).
+
+The repository's `local-maven/` directory contains the following prebuilt development artifacts. They are retained to support reproducible local dependency resolution and are **not** authored by FUNdoBREW's maintainer.
+
+| Component | Version | Upstream project | License |
+| --- | --- | --- | --- |
+| Just Enough Items (JEI), Fabric modules | 31.7.0.32 for Minecraft 26.3 | [mezz/JustEnoughItems](https://github.com/mezz/JustEnoughItems) | MIT |
+| MezzConfig, Fabric | 0.6.3 for Minecraft 26.3 | [mezz/MezzConfig](https://github.com/mezz/MezzConfig) | MIT |
+| MezzConfigGUI, Fabric | mc26.3-0.5.3 | [mezz/MezzConfigGui](https://github.com/mezz/MezzConfigGui) | MIT |
+
+JEI is an optional integration dependency. MezzConfig and MezzConfigGUI are configuration-library artifacts. Refer to each upstream project for source code, complete release history, and any additional notices it publishes.
+
+## MIT License — Just Enough Items
+
+Copyright (c) 2014-2015 mezz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## MIT License — MezzConfig and MezzConfigGUI
+
+Copyright (c) mezz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
