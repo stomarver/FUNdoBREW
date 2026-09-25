@@ -4,7 +4,7 @@ plugins {
 	id 'maven-publish'
 }
 
-version = "1-proof"
+version = "2-proof"
 
 repositories {
 	maven { url = 'https://maven.fabricmc.net/' }
