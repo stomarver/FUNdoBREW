@@ -1,0 +1,25 @@
+{
+	"required": true,
+	"package": "io.github.stomarver.fundo.client.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"AreaEffectCloudHitboxDebugMixin",
+		"CreativeModeTabsAccessor",
+		"DebugOptionsScreenOptionListMixin",
+		"DebugScreenEntriesInvoker",
+		"DebugScreenEntryListMixin",
+		"KeyboardHandlerMixin",
+		"JeiPotionSubtypeMixin",
+		"MidnightConfigButtonEntryMixin",
+		"MidnightConfigEntriesAccessor",
+		"MidnightConfigScreenMixin",
+		"MidnightConfigWriteMixin",
+		"MinecraftMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

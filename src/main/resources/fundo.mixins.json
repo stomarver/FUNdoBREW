@@ -1,0 +1,42 @@
+{
+	"required": true,
+	"package": "io.github.stomarver.fundo.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"AbstractThrownPotionImpactEffectsMixin",
+		"AreaEffectCloudAccessor",
+		"AreaEffectCloudPotionHitboxMixin",
+		"BrewingRecipeExtendedMarkMixin",
+		"BrewingStandBlockEntityMixin",
+		"CauldronDispatcherAccessor",
+		"CauldronInteractionsInvoker",
+		"EffectCommandsMixin",
+		"InfiniteCloudTagMixin",
+		"InfiniteDrinkTagMixin",
+		"InfiniteSplashTagMixin",
+		"InfiniteTippedArrowCraftingMixin",
+		"InfiniteTippedArrowTagMixin",
+		"ItemInstancePotionStackingMixin",
+		"ItemStackLegacySanitizerMixin",
+		"ItemStackPotionStackingSanitizerMixin",
+		"LingeringPotionLogMixin",
+		"LivingEntityInfiniteEffectsMixin",
+		"LivingEntityMilkGuardMixin",
+		"MinecraftServerMixin",
+		"MobEffectInstanceAccessor",
+		"ThrownSplashPotionPotionHitboxMixin",
+		"AreaEffectCloudPotionActionLogMixin",
+		"ItemStackPotionActionLogMixin",
+		"ProjectilePotionActionLogMixin",
+		"ServerPlayerPotionSelectionLogMixin",
+		"ThrownLingeringPotionActionLogMixin",
+		"ThrownLingeringPotionImmediateCloudMixin",
+		"ThrownSplashPotionActionLogMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

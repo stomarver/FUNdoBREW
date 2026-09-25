@@ -1,0 +1,25 @@
+{
+  "parent": "fundo:spilled_it_again",
+  "criteria": {
+    "received_infinite_effect": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "frame": "goal",
+    "description": {
+      "translate": "advancements.fundo.forever_young.description"
+    },
+    "icon": {
+      "id": "fundo:echo_dust"
+    },
+    "title": {
+      "translate": "advancements.fundo.forever_young.title"
+    }
+  },
+  "requirements": [
+    [
+      "received_infinite_effect"
+    ]
+  ]
+}

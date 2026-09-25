@@ -1,0 +1,17 @@
+{
+	"fabric:load_conditions": [
+		{
+			"condition": "fundo:feature_enabled",
+			"feature": "infinite_potions"
+		}
+	],
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+		"minecraft:echo_shard"
+	],
+	"result": {
+		"id": "fundo:echo_dust",
+		"count": 2
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"fabric:load_conditions": [
+		{
+			"condition": "fundo:feature_enabled",
+			"feature": "milk_changes"
+		}
+	],
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+		"fundo:splash_milk_bottle",
+		"minecraft:dragon_breath"
+	],
+	"result": {
+		"id": "fundo:lingering_milk_bottle",
+		"count": 1
+	}
+}
