@@ -13,7 +13,7 @@ Milk is no longer limited to buckets. FUNdoBREW adds:
 - **Milk Cauldrons** that fill and drain naturally;
 - splash milk that cleanses on impact;
 - lingering milk that leaves a temporary cleansing cloud;
-- sensible bottle handling—a full cauldron will not consume another bottle.
+- sensible bottle handling - a full cauldron will not consume another bottle.
 
 The result is a portable, throwable way to remove effects without changing the role of ordinary milk.
 
@@ -35,8 +35,8 @@ The configuration also provides a few independent tools:
 
 ### 🏆 Advancements
 Two advancements continue from vanilla's **Local Brewery**:
-- **spilled it again...** — break a Splash or Lingering Milk Bottle;
-- **Forever Young** — receive an effect that never fades.
+- **spilled it again...** - break a Splash or Lingering Milk Bottle;
+- **Forever Young** - receive an effect that never fades.
 
 ## Building & Launch
 ### Requirements
@@ -56,7 +56,7 @@ gradlew.bat clean shadowJar
 
 The release artifact is written to:
 ```text
-build/libs/fundo_2-proof+mc26.3.jar
+build/libs/fundo_3-proof+mc26.3.jar
 ```
 or just download it from [Releases](https://github.com/stomarver/FUNdoBREW/releases)
 
@@ -75,14 +75,18 @@ Some gameplay and compatibility changes require a restart. Logging options can b
 
 ## Compatibility
 FUNdoBREW works on its own and has optional integrations:
-- **Farmer's Delight Refabricated** — reuses its Milk Bottle instead of registering a duplicate normal bottle;
-- **JEI** — displays recipes and supported brewing paths;
-- **Mod Menu** — adds an in-game entry point to the configuration screen.
+- **Farmer's Delight Refabricated** - reuses its Milk Bottle instead of registering a duplicate normal bottle;
+- **JEI** - displays recipes and supported brewing paths;
+- **Mod Menu** - adds an in-game entry point to the configuration screen.
+
+Compatibility with small, single-function mods - such as Potion Stacking, Stacking Potions, The Splash Milk, and similar projects - is deliberately out of scope. FUNdoBREW already implements much of that territory, so compatibility work is aimed primarily at larger mods that are commonly used in modpacks.
 
 Found an incompatibility? Please [open an issue](https://github.com/stomarver/FUNdoBREW/issues) and include the Minecraft version, FUNdoBREW version, a mod list, and the relevant log.
 
 ## Project status
-FUNdoBREW is an independent, one-person hobby project. Feedback and bug reports are welcome, but support, compatibility, balance, and release timing are handled on a best-effort basis. Back up important worlds and test updates before deploying them to a long-running server or modpack.
+FUNdoBREW has no dedicated testers: I am the sole developer, gameplay designer, and tester. The mod is currently in the **proof** stage - the project's direct equivalent of alpha. Its main functionality is stable, but major oversights and even critical bugs are still possible; some issues could damage worlds or disrupt progression. Please make world backups regularly.
+
+I nevertheless try to design features so that the effects of incorrect behavior can be removed or recovered from whenever possible. Feedback and bug reports are welcome, but support, compatibility, balance, and release timing are handled on a best-effort basis.
 
 ## License
 <a href="License"><img alt="Apache License 2.0" src="https://img.shields.io/badge/License-Apache--2.0-blue?style=plastic"></a>
