@@ -1,0 +1,57 @@
+{
+	"schemaVersion": 1,
+	"id": "fundo",
+	"version": "${version}",
+	"name": "FUNdoBREW",
+	"description": "Expands vanilla brewing with new ways to preserve and cleanse effects.",
+	"authors": [
+		"st0m4rv3r"
+	],
+	"contact": {
+		"homepage": "https://github.com/stomarver",
+		"sources": "https://github.com/stomarver"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/fundo/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.github.stomarver.fundo.Fundo"
+		],
+		"client": [
+			"io.github.stomarver.fundo.client.FundoClient"
+		],
+		"jei_mod_plugin": [
+			"io.github.stomarver.fundo.compat.jei.FundoJeiPlugin"
+		],
+		"modmenu": [
+			"io.github.stomarver.fundo.client.FundoModMenu"
+		]
+	},
+	"mixins": [
+		"fundo.mixins.json",
+		{
+			"config": "fundo.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"jei": "*",
+		"modmenu": "*",
+		"farmersdelight": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.modrinth": "https://modrinth.com/user/st0m4rv3r",
+				"modmenu.twitter": "https://x.com/stomarver"
+			}
+		}
+	}
+}

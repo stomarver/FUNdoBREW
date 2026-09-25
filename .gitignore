@@ -1,0 +1,23 @@
+# Source-release whitelist: every other workspace file stays local.
+/*
+
+# Repository metadata
+!/.gitignore
+
+# Gradle wrapper and build definition
+!/gradle/
+!/gradle.properties
+!/build.gradle
+!/settings.gradle
+!/gradlew
+!/gradlew.bat
+
+# Published sources and locally retained Maven artifacts
+!/src/
+!/local-maven/
+
+# Player- and release-facing documents
+!/License
+!/Modrinth
+!/Readme
+!/Guide

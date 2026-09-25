@@ -1,0 +1,9 @@
+{
+	"fabric:load_conditions": [
+		{
+			"condition": "fundo:feature_enabled",
+			"feature": "infinite_potions"
+		}
+	],
+	"type": "fundo:echo_brewing"
+}

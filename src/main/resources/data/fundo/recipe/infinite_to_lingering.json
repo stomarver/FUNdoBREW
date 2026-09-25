@@ -1,0 +1,12 @@
+{
+	"fabric:load_conditions": [
+		{
+			"condition": "fundo:feature_enabled",
+			"feature": "infinite_potions"
+		}
+	],
+	"type": "fundo:infinite_conversion",
+	"input": "minecraft:splash_potion",
+	"reagent": "minecraft:dragon_breath",
+	"output": "minecraft:lingering_potion"
+}

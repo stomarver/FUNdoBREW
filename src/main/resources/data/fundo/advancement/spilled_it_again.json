@@ -1,0 +1,24 @@
+{
+  "parent": "minecraft:nether/brew_potion",
+  "criteria": {
+    "milk_bottle_broken": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.fundo.spilled_it_again.description"
+    },
+    "icon": {
+      "id": "fundo:splash_milk_bottle"
+    },
+    "title": {
+      "translate": "advancements.fundo.spilled_it_again.title"
+    }
+  },
+  "requirements": [
+    [
+      "milk_bottle_broken"
+    ]
+  ]
+}

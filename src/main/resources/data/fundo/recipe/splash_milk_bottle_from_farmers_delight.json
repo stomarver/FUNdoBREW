@@ -1,0 +1,18 @@
+{
+	"fabric:load_conditions": [
+		{
+			"condition": "fundo:feature_enabled",
+			"feature": "farmers_delight_milk_bottle"
+		}
+	],
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+		"farmersdelight:milk_bottle",
+		"minecraft:gunpowder"
+	],
+	"result": {
+		"id": "fundo:splash_milk_bottle",
+		"count": 1
+	}
+}

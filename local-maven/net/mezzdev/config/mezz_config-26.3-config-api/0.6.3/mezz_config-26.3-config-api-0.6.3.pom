@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.mezzdev.config</groupId>
+  <artifactId>mezz_config-26.3-config-api</artifactId>
+  <version>0.6.3</version>
+  <name>MezzConfig API</name>
+  <description>A lightweight client and server-authoritative configuration API and runtime for Minecraft mods.</description>
+  <url>https://github.com/mezz/MezzConfig</url>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/license/mit</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>mezz</id>
+      <name>mezz</name>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/mezz/MezzConfig.git</connection>
+    <developerConnection>scm:git:https://github.com/mezz/MezzConfig.git</developerConnection>
+    <url>https://github.com/mezz/MezzConfig</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <version>26.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jspecify</groupId>
+      <artifactId>jspecify</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+</project>
