@@ -56,7 +56,7 @@ gradlew.bat clean shadowJar
 
 The release artifact is written to:
 ```text
-build/libs/fundo_1-proof+mc26.3.jar
+build/libs/fundo_2-proof+mc26.3.jar
 ```
 or just download it from [Releases](https://github.com/stomarver/FUNdoBREW/releases)
 
