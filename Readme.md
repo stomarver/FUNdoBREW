@@ -72,10 +72,8 @@ The release artifact is written to:
 build/libs/fundo_1-proof+mc26.3.jar
 ```
 
-For release-upload steps, see [Guide](Guide).
-
 ## License
-FUNdoBREW is licensed under Apache-2.0. Third-party notices are available in [Third Party](Third%20Party).
+FUNdoBREW is licensed under [Apache-2.0](License). Third-party notices are available in [Third Party](Third%20Party).
 
 
 
