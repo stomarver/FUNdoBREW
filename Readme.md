@@ -89,6 +89,5 @@ FUNdoBREW has no dedicated testers: I am the sole developer, gameplay designer, 
 I nevertheless try to design features so that the effects of incorrect behavior can be removed or recovered from whenever possible. Feedback and bug reports are welcome, but support, compatibility, balance, and release timing are handled on a best-effort basis.
 
 ## License
-<a href="License"><img alt="Apache License 2.0" src="https://img.shields.io/badge/License-Apache--2.0-blue?style=plastic"></a>
-
+FUNdoBREW is licensed under the Apache [License 2.0](License).\
 _Third-party notices are listed in [Third Party](Third%20Party)._
