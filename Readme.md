@@ -35,8 +35,8 @@ The configuration also provides a few independent tools:
 
 ### 🏆 Advancements
 Two advancements continue from vanilla's **Local Brewery**:
-- **spilled it again...** - Break a bottle of milk.\
-- **Forever Young** - Receive an effect that never fades.\
+- **spilled it again...** - Break a bottle of milk.
+- **Forever Young** - Receive an effect that never fades.
 
 ## Building & Launch
 ### Requirements
