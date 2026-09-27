@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import io.github.stomarver.fundo.config.FundoConfig;
 import io.github.stomarver.fundo.entity.MilkCleansingCloud;
 import io.github.stomarver.fundo.hitbox.PotionHitboxes;
 
@@ -22,9 +21,6 @@ public abstract class LivingEntityMilkGuardMixin {
 			at = @At("HEAD"), cancellable = true)
 	private void fundo$denyEffectsInsideMilkCloud(MobEffectInstance instance, Entity source,
 			CallbackInfoReturnable<Boolean> cir) {
-		if (!FundoConfig.milk_changes) {
-			return;
-		}
 		LivingEntity self = (LivingEntity) (Object) this;
 		Level level = self.level();
 		if (level.isClientSide()) {

@@ -1,10 +1,4 @@
 {
-	"fabric:load_conditions": [
-		{
-			"condition": "fundo:feature_enabled",
-			"feature": "milk_changes"
-		}
-	],
 	"replace": false,
 	"values": [
 		"fundo:milk_cauldron"

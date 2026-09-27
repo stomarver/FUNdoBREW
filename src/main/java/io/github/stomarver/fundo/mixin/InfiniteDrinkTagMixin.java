@@ -16,6 +16,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.debug.ActionLogs;
 import io.github.stomarver.fundo.effect.InfiniteEffects;
 import io.github.stomarver.fundo.effect.InfinitePotionMark;
@@ -25,7 +26,7 @@ public abstract class InfiniteDrinkTagMixin {
 
 	@Inject(method = "finishUsingItem", at = @At("TAIL"))
 	private void fundo$tagInfiniteDrinker(Level level, LivingEntity entity, CallbackInfoReturnable<ItemStack> cir) {
-		if (level.isClientSide() || !FundoConfig.infinite_potions) {
+		if (level.isClientSide() || !FundoFeaturePolicy.brewingAdditions()) {
 			return;
 		}
 		ItemStack self = (ItemStack) (Object) this;

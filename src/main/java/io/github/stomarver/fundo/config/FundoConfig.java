@@ -13,9 +13,20 @@ public class FundoConfig extends MidnightConfig {
 	public static final String MISC = "misc";
 	public static final String DEBUG = "debug";
 
-	@Entry(category = GENERAL) public static boolean milk_changes = true;
+	 
 
-	@Entry(category = GENERAL) public static boolean infinite_potions = true;
+
+
+
+	@SerializedName(value = "milk_additions", alternate = {"milk_changes"})
+	@Entry(category = GENERAL) public static boolean milk_additions = true;
+
+	 
+
+
+
+	@SerializedName(value = "brewing_additions", alternate = {"infinite_potions"})
+	@Entry(category = GENERAL) public static boolean brewing_additions = true;
 
 	@Comment(category = GENERAL, centered = false) public static Comment features_restart_notice;
 
@@ -35,9 +46,22 @@ public class FundoConfig extends MidnightConfig {
 	public void writeChanges() {
 		super.writeChanges();
 		ActionLogs.refresh();
+		FundoFeaturePolicy.configSaved();
 	}
 
+	 
+
+
+
 	@Entry(category = GENERAL) public static boolean increased_potion_stacking = true;
+
+	@Comment(category = MISC, centered = false) public static Comment functionals;
+
+	@Entry(category = MISC) public static boolean milk_bucket_pouring = true;
+
+	@Entry(category = MISC) public static boolean milk_bucket_drinking = true;
+
+	@Comment(category = MISC, centered = false) public static Comment functionals_compatibility_spacer;
 
 	@Comment(category = MISC, centered = false) public static Comment compatibility;
 

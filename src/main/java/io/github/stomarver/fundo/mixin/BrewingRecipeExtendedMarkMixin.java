@@ -13,13 +13,14 @@ import net.minecraft.world.item.crafting.BrewingRecipe;
 
 import io.github.stomarver.fundo.brewing.ExtendedPotionMark;
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 
 @Mixin(BrewingRecipe.class)
 public abstract class BrewingRecipeExtendedMarkMixin {
 
 	@Inject(method = "assemble", at = @At("RETURN"))
 	private void fundo$markRedstoneBrewedOutput(BrewingInput input, CallbackInfoReturnable<ItemStack> cir) {
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			return;
 		}
 		ItemStack result = cir.getReturnValue();

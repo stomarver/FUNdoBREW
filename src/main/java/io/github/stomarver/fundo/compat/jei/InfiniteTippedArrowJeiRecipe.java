@@ -14,16 +14,16 @@ import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.ShapedCraftingRecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 
-/**
- * JEI-only presentation companion for Minecraft's crafting_imbue tipped-arrow
- * recipe. It retains the native 3x3 ImbueRecipe shape, but substitutes bounded
- * lists of Fundo's marked lingering inputs and marked arrow outputs for
- * vanilla's unbounded WithAnyPotion display.
- *
- * <p>This object is registered only with JEI, never with Minecraft's recipe
- * manager. Gameplay crafting remains the vanilla ImbueRecipe plus Fundo's
- * marker-preservation mixin.</p>
- */
+ 
+
+
+
+
+
+
+
+
+
 final class InfiniteTippedArrowJeiRecipe extends ImbueRecipe {
 
 	private final List<RecipeDisplay> displays;

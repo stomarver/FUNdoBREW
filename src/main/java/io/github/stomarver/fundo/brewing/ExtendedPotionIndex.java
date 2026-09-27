@@ -23,6 +23,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 
 import io.github.stomarver.fundo.Fundo;
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 
 public final class ExtendedPotionIndex {
 
@@ -111,7 +112,7 @@ public final class ExtendedPotionIndex {
 	}
 
 	private static Set<CreativeEchoSource> collectCreativeSources() {
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			return Set.of();
 		}
 		Set<CreativeEchoSource> result = new LinkedHashSet<>();

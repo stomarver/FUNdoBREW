@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.debug.ActionLogs;
 import io.github.stomarver.fundo.effect.InfiniteEffects;
 
@@ -30,7 +31,7 @@ public abstract class LivingEntityInfiniteEffectsMixin {
 		if (self.level().isClientSide()) {
 			return;
 		}
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			InfiniteEffects.purgeRetiredRows(self);
 			return;
 		}
@@ -54,7 +55,7 @@ public abstract class LivingEntityInfiniteEffectsMixin {
 	@Inject(method = "onEffectsRemoved", at = @At("TAIL"))
 	private void fundo$stripRowsOfRemoved(Collection<MobEffectInstance> removed, CallbackInfo ci) {
 		LivingEntity self = fundo$self();
-		if (self.level().isClientSide() || !FundoConfig.infinite_potions) {
+		if (self.level().isClientSide() || !FundoFeaturePolicy.brewingAdditions()) {
 			return;
 		}
 		for (MobEffectInstance instance : removed) {
@@ -69,7 +70,7 @@ public abstract class LivingEntityInfiniteEffectsMixin {
 	@Inject(method = "removeAllEffects", at = @At("RETURN"))
 	private void fundo$stripAllRowsOnCleared(CallbackInfoReturnable<Boolean> cir) {
 		LivingEntity self = fundo$self();
-		if (self.level().isClientSide() || !FundoConfig.infinite_potions) {
+		if (self.level().isClientSide() || !FundoFeaturePolicy.brewingAdditions()) {
 			return;
 		}
 		var rows = InfiniteEffects.infiniteTagsOf(self);
@@ -85,7 +86,7 @@ public abstract class LivingEntityInfiniteEffectsMixin {
 	@Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
 	private void fundo$sanitizeLoadedRetiredRows(net.minecraft.world.level.storage.ValueInput input, CallbackInfo ci) {
 		LivingEntity self = fundo$self();
-		if (!self.level().isClientSide() && !FundoConfig.infinite_potions) {
+		if (!self.level().isClientSide() && !FundoFeaturePolicy.brewingAdditions()) {
 			InfiniteEffects.purgeRetiredRows(self);
 		}
 	}
@@ -94,7 +95,7 @@ public abstract class LivingEntityInfiniteEffectsMixin {
 	private void fundo$syncInfiniteEffects(CallbackInfo ci) {
 		LivingEntity self = fundo$self();
 		if (!self.level().isClientSide()) {
-			if (!FundoConfig.infinite_potions) {
+			if (!FundoFeaturePolicy.brewingAdditions()) {
 				InfiniteEffects.purgeRetiredRows(self);
 				return;
 			}

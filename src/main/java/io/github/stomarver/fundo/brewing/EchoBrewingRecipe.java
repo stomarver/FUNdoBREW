@@ -19,6 +19,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.effect.InfinitePotionMark;
 import io.github.stomarver.fundo.item.FundoItems;
 
@@ -53,7 +54,7 @@ public final class EchoBrewingRecipe extends BrewingRecipe {
 	@Override
 	public boolean matches(BrewingInput input, Level level) {
 
-		if (!FundoConfig.infinite_potions || FundoItems.ECHO_DUST == null || !input.reagent().is(FundoItems.ECHO_DUST)) {
+		if (!FundoFeaturePolicy.brewingAdditions() || FundoItems.ECHO_DUST == null || !input.reagent().is(FundoItems.ECHO_DUST)) {
 			return false;
 		}
 
@@ -62,7 +63,7 @@ public final class EchoBrewingRecipe extends BrewingRecipe {
 	}
 
 	public static boolean canEchoBrew(ItemStack stack) {
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			return false;
 		}
 		if (ExtendedPotionMark.isMarked(stack)) {
@@ -94,7 +95,7 @@ public final class EchoBrewingRecipe extends BrewingRecipe {
 	}
 
 	public static ItemStack applyCreativeEchoBrew(ItemStack potionStack) {
-		if (!FundoConfig.infinite_potions || !ExtendedPotionIndex.isCreativeSourceAllowed(potionStack)) {
+		if (!FundoFeaturePolicy.brewingAdditions() || !ExtendedPotionIndex.isCreativeSourceAllowed(potionStack)) {
 			return ItemStack.EMPTY;
 		}
 		return assembleApprovedEcho(potionStack);
@@ -122,8 +123,8 @@ public final class EchoBrewingRecipe extends BrewingRecipe {
 				List.copyOf(infinite),
 				name);
 
-		// Keep every unrelated component intact: resource packs can select custom_data,
-		// custom_model_data, item_model, and other stack components on the echoed potion.
+		 
+		 
 		ItemStack result = potionStack.copyWithCount(1);
 		result.set(DataComponents.POTION_CONTENTS, echoed);
 

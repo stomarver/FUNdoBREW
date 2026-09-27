@@ -6,25 +6,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
+
+ 
+
+
+
 
 public final class PotionStacking {
-
-	private static volatile Boolean serverEnabled;
 
 	private PotionStacking() {
 	}
 
 	public static boolean enabled() {
-		Boolean value = serverEnabled;
-		return value != null ? value : FundoConfig.increased_potion_stacking;
-	}
-
-	public static void installServerValue(boolean enabled) {
-		serverEnabled = enabled;
-	}
-
-	public static void clearServerValue() {
-		serverEnabled = null;
+		return FundoFeaturePolicy.increasedPotionStacking();
 	}
 
 	public static boolean isUnmodifiedVanillaPotion(ItemStack stack) {
@@ -33,9 +28,5 @@ public final class PotionStacking {
 		}
 		Item item = stack.getItem();
 		return item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION;
-	}
-
-	public static int limitCount(ItemStack stack, int count) {
-		return !enabled() && count > 1 && isUnmodifiedVanillaPotion(stack) ? 1 : count;
 	}
 }

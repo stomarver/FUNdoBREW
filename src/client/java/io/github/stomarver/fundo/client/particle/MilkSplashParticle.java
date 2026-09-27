@@ -10,15 +10,15 @@ import net.minecraft.util.RandomSource;
 
 public class MilkSplashParticle extends SingleQuadParticle {
 
-	/** Rounded to one decimal. */
+	 
 	private static final double LAUNCH_SPEED = 0.6D;
 
-	/** 2.52 × 1.12 = 2.8224 particle-gravity units, rounded to one decimal. */
+	 
 	private static final float PARTICLE_GRAVITY = 2.8F;
 
 	private static final double GRAVITY = PARTICLE_GRAVITY * 0.04D;
 
-	/** 21.2° minus 6°, rounded to a whole degree. */
+	 
 	private static final double CONE_DEG = 15.0D;
 
 	private static final double SPAWN_HEIGHT = 0.2D;

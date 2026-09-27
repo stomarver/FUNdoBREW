@@ -8,7 +8,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 
 import io.github.stomarver.fundo.Fundo;
 
-/** Awards the two event-based FUNdoBREW advancements from server facts only. */
+ 
 public final class FundoAdvancements {
 
 	private static final Identifier SPILLED_IT_AGAIN = Fundo.id("spilled_it_again");

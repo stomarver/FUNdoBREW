@@ -1,0 +1,18 @@
+{
+  "pack": {
+    "min_format": [97, 1],
+    "max_format": [97, 1],
+    "description": {
+      "text": "Enhances milk fluid visuals",
+      "extra": [
+        {
+          "text": "\n"
+        },
+        {
+          "text": "⚠ Sodium INCOMPATIBLE!",
+          "color": "red"
+        }
+      ]
+    }
+  }
+}

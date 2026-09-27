@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "fundo:milk",
+      "required": false
+    },
+    {
+      "id": "fundo:flowing_milk",
+      "required": false
+    }
+  ]
+}

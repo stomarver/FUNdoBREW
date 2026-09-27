@@ -1,6 +1,7 @@
 package io.github.stomarver.fundo.brewing;
 
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
@@ -13,7 +14,7 @@ public final class ExtendedPotionMark {
 	}
 
 	public static void mark(ItemStack stack) {
-		if (FundoConfig.infinite_potions) {
+		if (FundoFeaturePolicy.brewingAdditions()) {
 			CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> tag.putBoolean(KEY, true));
 		}
 	}

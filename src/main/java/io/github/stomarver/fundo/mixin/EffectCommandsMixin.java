@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.effect.FundoInfiniteCommands;
 
 @Mixin(EffectCommands.class)
@@ -22,7 +23,7 @@ public abstract class EffectCommandsMixin {
 			at = @At("TAIL"))
 	private static void fundo$registerFundoInfinite(CommandDispatcher<CommandSourceStack> dispatcher,
 			CommandBuildContext context, CallbackInfo ci) {
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			return;
 		}
 		CommandNode<CommandSourceStack> effectRoot = dispatcher.getRoot().getChild("effect");

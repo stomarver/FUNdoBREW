@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import io.github.stomarver.fundo.entity.PotionImpactEffects;
 
-/** Replaces block-centred potion level events with exact-impact particles and sound. */
+ 
 @Mixin(AbstractThrownPotion.class)
 public abstract class AbstractThrownPotionImpactEffectsMixin {
 

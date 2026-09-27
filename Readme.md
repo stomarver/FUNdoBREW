@@ -1,77 +1,65 @@
 # FUNdoBREW
 
-<!-- Screenshots can be added here later. Suggested layout:
-## Gallery
-<p align="left">
-  <img src="docs/images/milk-brewing.png" width="48%" alt="Milk brewing">
-  <img src="docs/images/echo-dust.png" width="48%" alt="Echo Dust brewing">
-</p>
--->
-### 🥛 Milk brewing & cleansing
-Milk is no longer limited to buckets. FUNdoBREW adds:
-- **Milk Bottles**, **Splash Milk Bottles**, and **Lingering Milk Bottles**;
-- **Milk Cauldrons** that fill and drain naturally;
-- splash milk that cleanses on impact;
-- lingering milk that leaves a temporary cleansing cloud;
-- sensible bottle handling - a full cauldron will not consume another bottle.
+### 🥛 Milk
+FUNdoBREW adds Milk Bottles, Splash Milk Bottles, Lingering Milk Bottles, Milk Cauldrons, flowing Milk, and Milk Ice.
 
-The result is a portable, throwable way to remove effects without changing the role of ordinary milk.
+Milk and Water form Milk Ice only from a live adjacent contact. Replacing an isolated source is not a reaction. A real contact resolves without waiting for Milk's fluid delay, and updates the rest of a Milk flow when its source changes.
+
+### 🎯 Potion impacts & hitboxes
+Potion break particles and sound use the exact double-precision `HitResult` coordinate instead of `BlockPos` or the centre of the struck block. This addresses the positioning problem documented in [MC-189857](https://report.bugs.mojang.com/servicedesk/customer/portal/2/MC-189857). Milk bottle effects use the same impact coordinate.
+
+Splash potion selection uses spheres: radius **4.0** for ordinary splash potions and **1.25** for Milk splash. Lingering cloud selection uses a cylinder based on the cloud's live bounds. The Potion hitboxes debug option renders the same server-sent sphere or cylinder at its exact coordinates.
 
 ### ✨ Echo Dust & infinite effects
 Craft **2 Echo Dust** from an **Echo Shard**, then use it as a brewing ingredient with a supported potion. The potion keeps its form and amplifier, but its eligible effects no longer expire.
 
-FUNdoBREW deliberately keeps this mechanic selective:
-- instant effects cannot become infinite;
-- already-infinite effects are rejected;
-- normal splash and lingering conversion still works;
-- regular brewing remains useful alongside permanent effects.
+- Instant effects cannot become infinite.
+- Already-infinite effects are rejected.
+- Splash and lingering conversion is supported.
 
-### ⚙️ Optional quality of life
-The configuration also provides a few independent tools:
-- stack regular, splash, and lingering potions up to **16**;
-- speed up newly started brewing operations with a whole-number multiplier;
-- expose potion-hitbox helpers for testing;
-- write detailed potion and infinite-effect action logs for server diagnostics.
-
-### 🏆 Advancements
-Two advancements continue from vanilla's **Local Brewery**:
-- **spilled it again...** - Break a bottle of milk.
-- **Forever Young** - Receive an effect that never fades.
+### ⚙️ Enhanced Milk Vision
+**Enhanced Milk Vision** is an optional built-in resource pack and is disabled by default. It replaces the normal Milk fluid appearance with a shader-owned white surface and a world-space 16×16 pattern for Milk and Milk Cauldrons. The pack warns about Sodium incompatibility.
 
 ## Building & Launch
 ### Requirements
-  <a href="https://www.minecraft.net/"><img alt="Minecraft 26.3" src="https://img.shields.io/badge/Minecraft-26.3-62B47A?style=plastic&logo=minecraft&logoColor=white"><br>
-  <a href="https://fabricmc.net/use/installer/"><img alt="Fabric Loader 0.19.5 or newer" src="https://img.shields.io/badge/Fabric%20Loader-0.19.5%2B-DBD0B4?style=plastic&logo=fabric&logoColor=black"><br>
-  <a href="https://modrinth.com/mod/fabric-api"><img alt="Fabric API required" src="https://img.shields.io/badge/Fabric%20API-Required-DBD0B4?style=plastic&logo=fabric&logoColor=black"><br>
-  <a href="https://adoptium.net/temurin/releases/?version=25"><img alt="Java 25 or newer" src="https://img.shields.io/badge/Java-25%2B-E76F00?style=plastic&logo=openjdk&logoColor=white"><br>
-  <a>_MidnightLib is already bundled inside the release JAR._</a>
+<a href="https://www.minecraft.net/"><img alt="Minecraft 26.3" src="https://img.shields.io/badge/Minecraft-26.3-62B47A?style=plastic&logo=minecraft&logoColor=white"><br>
+<a href="https://fabricmc.net/use/installer/"><img alt="Fabric Loader 0.19.5 or newer" src="https://img.shields.io/badge/Fabric%20Loader-0.19.5%2B-DBD0B4?style=plastic&logo=fabric&logoColor=black"><br>
+<a href="https://modrinth.com/mod/fabric-api"><img alt="Fabric API required" src="https://img.shields.io/badge/Fabric%20API-Required-DBD0B4?style=plastic&logo=fabric&logoColor=black"><br>
+<a href="https://adoptium.net/temurin/releases/?version=25"><img alt="Java 25 or newer" src="https://img.shields.io/badge/Java-25%2B-E76F00?style=plastic&logo=openjdk&logoColor=white"><br>
+
+_MidnightLib is bundled inside the release JAR._
 
 ### Building from source
 ```bash
 ./gradlew clean shadowJar
 ```
+
 ```powershell
 gradlew.bat clean shadowJar
 ```
 
 The release artifact is written to:
+
 ```text
-build/libs/fundo_3-proof+mc26.3.jar
+build/libs/fundo_3-proof+263.jar
 ```
-or just download it from [Releases](https://github.com/stomarver/FUNdoBREW/releases)
+
+or can be downloaded from [Releases](https://github.com/stomarver/FUNdoBREW/releases).
 
 ## Configuration
 | Option | Default | What it controls |
 |---|:---:|---|
-| Milk Additions | Yes | Milk bottles, Milk Cauldrons, projectiles, recipes, and cleansing clouds |
-| Brewing Additions | Yes | Echo Dust, infinite potions, related recipes and commands |
+| Milk Additions | Yes | Milk Bottle Collection & Recipes; does not unregister Milk content |
+| Brewing Additions | Yes | Echo Dust and infinite-effect recipes and brewing; preserves existing Echo Dust data |
 | Brewing Speed Multiplier | 1× | Duration of newly started brewing operations |
-| Increased Potion Stacking | Yes | Potion stack size of up to 16 |
-| Farmer's Delight integration | Yes | Reuse of Farmer's Delight's Milk Bottle when available |
-| Action logs | Disabled | Optional server-side diagnostic logs |
-| Potion hitboxes | OFF | Debug visualization through Minecraft's debug options |
+| Increased Potion Stacking | Yes | Fallback stack limit of up to 16 for vanilla potion containers without `minecraft:max_stack_size` |
+| Milk Bucket Pouring | Yes | Milk Bucket placement |
+| Milk Bucket Drinking | Yes | Normal Milk Bucket drinking |
+| Farmer's Delight integration | Yes | Farmer's Delight Milk Bottle when available |
+| Action logs | Disabled | Server diagnostic logs |
+| Potion hitboxes | OFF | Sphere and cylinder debug overlay |
 
-Some gameplay and compatibility changes require a restart. Logging options can be refreshed while a world is running.
+Explicit max-stack components supplied by commands, data packs, or other mods take precedence. Server feature settings are synchronized to connected clients and refresh affected availability and recipes.
 
 ## Compatibility
 FUNdoBREW works on its own and has optional integrations:
@@ -89,5 +77,6 @@ FUNdoBREW has no dedicated testers: I am the sole developer, gameplay designer, 
 I nevertheless try to design features so that the effects of incorrect behavior can be removed or recovered from whenever possible. Feedback and bug reports are welcome, but support, compatibility, balance, and release timing are handled on a best-effort basis.
 
 ## License
-FUNdoBREW is licensed under the Apache [License 2.0](License).\
+<a href="License"><img alt="Apache License 2.0" src="https://img.shields.io/badge/License-Apache--2.0-blue?style=plastic"></a>
+
 _Third-party notices are listed in [Third Party](Third%20Party)._

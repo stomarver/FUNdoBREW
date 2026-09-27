@@ -14,6 +14,8 @@
 		"MidnightConfigEntriesAccessor",
 		"MidnightConfigScreenMixin",
 		"MidnightConfigWriteMixin",
+		"MilkFogMixin",
+		"FluidRendererMilkShaderMarkerMixin",
 		"MinecraftMixin"
 	],
 	"injectors": {

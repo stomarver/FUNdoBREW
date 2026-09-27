@@ -32,18 +32,19 @@ import io.github.stomarver.fundo.brewing.EchoBrewingRecipe;
 import io.github.stomarver.fundo.brewing.ExtendedPotionIndex;
 import io.github.stomarver.fundo.brewing.ExtendedPotionIndex.CreativeEchoSource;
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.effect.InfinitePotionMark;
 import io.github.stomarver.fundo.item.FundoItems;
 
-/** JEI rows for the server-synchronised set of valid Echo Dust brewing paths. */
+ 
 public final class FundoJeiPlugin implements IModPlugin {
 
 	private static final Identifier UID = Fundo.id("jei_plugin");
-	/**
-	 * The only recipe-manager BrewingRecipe templates that Fundo owns. Their
-	 * ingredients are intentionally broad because their real validity lives in
-	 * matches(...), so JEI's generic importer cannot safely render them.
-	 */
+	 
+
+
+
+
 	private static final Set<Identifier> OPAQUE_TEMPLATE_UIDS = Set.of(
 			Fundo.id("echo_brewing"),
 			Fundo.id("infinite_to_splash"),
@@ -82,19 +83,19 @@ public final class FundoJeiPlugin implements IModPlugin {
 		runtime = null;
 	}
 
-	/**
-	 * The server sends the exact list of Echo-eligible potion containers after a
-	 * join or data-pack reload. JEI has no runtime removal API, so superseded
-	 * rows are hidden and replacement rows receive a new internal recipe id.
-	 */
+	 
+
+
+
+
 	public static synchronized void refreshAfterCreativeContract() {
 		IJeiRuntime current = runtime;
 		if (current == null) {
 			return;
 		}
 
-		// A client recipe reload can reintroduce JEI's raw RecipeManager import.
-		// Repeat this idempotent hide before deciding whether dynamic rows changed.
+		 
+		 
 		hideOpaqueTemplateRows(current);
 		List<CreativeEchoSource> sources = currentSources();
 		if (sources.equals(dynamicSources)) {
@@ -121,12 +122,12 @@ public final class FundoJeiPlugin implements IModPlugin {
 	}
 
 	private static void hideOpaqueTemplateRows(IJeiRuntime current) {
-		/*
-		 * JEI's hidden-recipe set is identity-based, not equality-based. Looking
-		 * up the rows from the live manager is therefore essential: a freshly
-		 * constructed recipe with the same UID cannot hide the imported object.
-		 * includeHidden also makes this safe after a client recipe reload.
-		 */
+		 
+
+
+
+
+
 		List<IJeiBrewingRecipe> importedTemplateRows = current.getRecipeManager()
 				.createRecipeLookup(RecipeTypes.BREWING)
 				.includeHidden()
@@ -140,8 +141,8 @@ public final class FundoJeiPlugin implements IModPlugin {
 
 	private static List<CreativeEchoSource> currentSources() {
 		return ExtendedPotionIndex.creativeSources().stream()
-				// Match vanilla's normal -> splash -> lingering brewing progression,
-				// rather than lexicographic item-id order (lingering came first).
+				 
+				 
 				.sorted(Comparator.comparingInt((CreativeEchoSource source) -> containerOrder(source.container()))
 						.thenComparing(source -> source.container().toString())
 						.thenComparing(source -> source.potion().toString()))
@@ -162,7 +163,7 @@ public final class FundoJeiPlugin implements IModPlugin {
 	}
 
 	private static List<IJeiBrewingRecipe> buildDynamicEntries(IVanillaRecipeFactory factory, int revision) {
-		if (!FundoConfig.infinite_potions || FundoItems.ECHO_DUST == null || dynamicSources.isEmpty()) {
+		if (!FundoFeaturePolicy.brewingAdditions() || FundoItems.ECHO_DUST == null || dynamicSources.isEmpty()) {
 			return List.of();
 		}
 
@@ -208,15 +209,15 @@ public final class FundoJeiPlugin implements IModPlugin {
 		return List.copyOf(entries);
 	}
 
-	/**
-	 * Mirrors vanilla's one-card crafting_imbue presentation. Minecraft's
-	 * ImbueRecipe uses WithAnyPotion, which derives every registered finite
-	 * potion and cannot retain Fundo's custom infinite components. The JEI-only
-	 * companion instead exposes one bounded composite of all exact marked
-	 * lingering sources and marked tipped-arrow results.
-	 */
+	 
+
+
+
+
+
+
 	private static List<RecipeHolder<CraftingRecipe>> buildInfiniteArrowEntries(int revision) {
-		if (!FundoConfig.infinite_potions || dynamicSources.isEmpty()) {
+		if (!FundoFeaturePolicy.brewingAdditions() || dynamicSources.isEmpty()) {
 			return List.of();
 		}
 

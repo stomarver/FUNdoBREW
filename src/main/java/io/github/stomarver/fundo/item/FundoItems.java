@@ -1,11 +1,13 @@
 package io.github.stomarver.fundo.item;
 
 import io.github.stomarver.fundo.Fundo;
+import io.github.stomarver.fundo.block.FundoBlocks;
 import io.github.stomarver.fundo.brewing.EchoBrewingRecipe;
 import io.github.stomarver.fundo.brewing.ExtendedPotionIndex;
 import io.github.stomarver.fundo.brewing.ExtendedPotionIndex.CreativeEchoSource;
 import io.github.stomarver.fundo.compat.MilkBottleCompatibility;
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.effect.InfinitePotionMark;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTabOutput;
@@ -18,6 +20,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
@@ -35,11 +38,14 @@ import java.util.function.Function;
 public final class FundoItems {
 
 	public static Item MILK_BOTTLE = null;
+	public static Item MILK_ICE = null;
 
 	public static Item ECHO_DUST = null;
 
 	private static final ResourceKey<CreativeModeTab> TAB_FOOD_AND_DRINKS =
 			ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.withDefaultNamespace("food_and_drinks"));
+	private static final ResourceKey<CreativeModeTab> TAB_BUILDING_BLOCKS =
+			ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.withDefaultNamespace("building_blocks"));
 	private static final ResourceKey<CreativeModeTab> TAB_INGREDIENTS =
 			ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.withDefaultNamespace("ingredients"));
 	private static final ResourceKey<CreativeModeTab> TAB_COMBAT =
@@ -52,10 +58,11 @@ public final class FundoItems {
 	private FundoItems() {
 	}
 
-	/**
-	 * Returns the one normal milk bottle that FUNdoBREW should consume, produce, and log.
-	 * The value can be null before an optional Farmer's Delight registry entry exists or when milk additions are disabled.
-	 */
+	 
+
+
+
+
 	public static Item normalMilkBottle() {
 		if (MilkBottleCompatibility.usesFarmersDelightBottle()) {
 			return MilkBottleCompatibility.farmersDelightMilkBottle();
@@ -76,44 +83,50 @@ public final class FundoItems {
 	public static void register() {
 
 		MilkBottleCompatibility.selectSourceAtStartup();
-		if (FundoConfig.milk_changes && !MilkBottleCompatibility.usesFarmersDelightBottle()) {
-			MILK_BOTTLE = register(
-					"milk_bottle",
-					Item::new,
-					new Item.Properties()
-							.stacksTo(16)
-							.component(DataComponents.CONSUMABLE, Consumables.MILK_BUCKET)
-
-							.component(DataComponents.USE_REMAINDER,
-									new UseRemainder(new ItemStackTemplate(Items.GLASS_BOTTLE))));
+		 
+		 
+		MILK_BOTTLE = register(
+				"milk_bottle",
+				Item::new,
+				new Item.Properties()
+						.stacksTo(16)
+						.component(DataComponents.CONSUMABLE, Consumables.MILK_BUCKET)
+						.component(DataComponents.USE_REMAINDER,
+								new UseRemainder(new ItemStackTemplate(Items.GLASS_BOTTLE))));
+		if (FundoBlocks.MILK_ICE != null) {
+			MILK_ICE = register("milk_ice", properties -> new BlockItem(FundoBlocks.MILK_ICE, properties),
+					new Item.Properties());
 		}
-		if (FundoConfig.infinite_potions) {
-			ECHO_DUST = register("echo_dust", Item::new, new Item.Properties());
-		}
-		if (FundoConfig.milk_changes) {
-			SPLASH_MILK_BOTTLE = register(
-					"splash_milk_bottle", SplashMilkBottleItem::new, new Item.Properties().stacksTo(16));
-
-			DispenserBlock.registerBehavior(SPLASH_MILK_BOTTLE, new ProjectileDispenseBehavior(SPLASH_MILK_BOTTLE));
-		}
-		if (FundoConfig.milk_changes) {
-			LINGERING_MILK_BOTTLE = register(
-					"lingering_milk_bottle", LingeringMilkBottleItem::new, new Item.Properties().stacksTo(16));
-			DispenserBlock.registerBehavior(LINGERING_MILK_BOTTLE, new ProjectileDispenseBehavior(LINGERING_MILK_BOTTLE));
-		}
+		ECHO_DUST = register("echo_dust", Item::new, new Item.Properties());
+		SPLASH_MILK_BOTTLE = register(
+				"splash_milk_bottle", SplashMilkBottleItem::new, new Item.Properties().stacksTo(16));
+		DispenserBlock.registerBehavior(SPLASH_MILK_BOTTLE, new ProjectileDispenseBehavior(SPLASH_MILK_BOTTLE));
+		LINGERING_MILK_BOTTLE = register(
+				"lingering_milk_bottle", LingeringMilkBottleItem::new, new Item.Properties().stacksTo(16));
+		DispenserBlock.registerBehavior(LINGERING_MILK_BOTTLE, new ProjectileDispenseBehavior(LINGERING_MILK_BOTTLE));
+		DispenserBlock.registerBehavior(Items.MILK_BUCKET, new MilkBucketDispenseBehavior());
 
 		CreativeModeTabEvents.modifyOutputEvent(TAB_FOOD_AND_DRINKS)
 				.register(entries -> {
 					Item milkBottle = normalMilkBottle();
-					// Farmer's Delight owns its active bottle and its native creative-tab placement.
+					 
 					if (milkBottle != null && !MilkBottleCompatibility.usesFarmersDelightBottle()) {
 						entries.insertBefore(Items.HONEY_BOTTLE, milkBottle);
 					}
-					if (SPLASH_MILK_BOTTLE != null) {
+					 
+					 
+					if (FundoFeaturePolicy.milkAdditions() && SPLASH_MILK_BOTTLE != null) {
 						entries.insertBefore(Items.SPLASH_POTION, SPLASH_MILK_BOTTLE);
 					}
-					if (LINGERING_MILK_BOTTLE != null) {
+					if (FundoFeaturePolicy.milkAdditions() && LINGERING_MILK_BOTTLE != null) {
 						entries.insertBefore(Items.LINGERING_POTION, LINGERING_MILK_BOTTLE);
+					}
+				});
+
+		CreativeModeTabEvents.modifyOutputEvent(TAB_BUILDING_BLOCKS)
+				.register(entries -> {
+					if (MILK_ICE != null) {
+						entries.accept(MILK_ICE);
 					}
 				});
 
@@ -132,7 +145,7 @@ public final class FundoItems {
 
 	private static void insertEchoPotionVariants(FabricCreativeModeTabOutput out) {
 
-		if (!FundoConfig.infinite_potions || ECHO_DUST == null) {
+		if (!FundoFeaturePolicy.brewingAdditions() || ECHO_DUST == null) {
 			return;
 		}
 		Item[] containers = {Items.POTION, Items.SPLASH_POTION, Items.LINGERING_POTION};
@@ -155,14 +168,14 @@ public final class FundoItems {
 		}
 	}
 
-	/**
-	 * The vanilla combat tab already carries one tipped-arrow variant per potion.
-	 * Insert the matching infinite arrow after that exact vanilla variant, using
-	 * the server-synchronised creative source contract. Creative tab output
-	 * entries must have count one; vanilla's crafting recipe still outputs eight.
-	 */
+	 
+
+
+
+
+
 	private static void insertEchoTippedArrowVariants(FabricCreativeModeTabOutput out) {
-		if (!FundoConfig.infinite_potions || ECHO_DUST == null) {
+		if (!FundoFeaturePolicy.brewingAdditions() || ECHO_DUST == null) {
 			return;
 		}
 		Identifier potionContainer = BuiltInRegistries.ITEM.getKey(Items.POTION);

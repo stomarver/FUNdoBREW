@@ -1,9 +1,8 @@
 package io.github.stomarver.fundo.block;
 
-import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.sound.FundoSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
@@ -18,6 +17,7 @@ import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
+ 
 public class MilkCauldronBlock extends LayeredCauldronBlock {
 	public MilkCauldronBlock(Properties properties) {
 		super(Biome.Precipitation.NONE, FundoCauldronInteractions.MILK, properties);
@@ -30,25 +30,16 @@ public class MilkCauldronBlock extends LayeredCauldronBlock {
 
 	@Override
 	protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier applier, boolean flag) {
-		if (level.isClientSide() || !(level instanceof ServerLevel serverLevel)) {
+		if (level.isClientSide() || !(level instanceof ServerLevel serverLevel) || !entity.mayInteract(serverLevel, pos)) {
 			return;
 		}
-		if (!FundoConfig.milk_changes) {
-
-			level.setBlock(pos, Blocks.CAULDRON.defaultBlockState(), Block.UPDATE_ALL);
-			return;
-		}
-		boolean mayInteract = entity.mayInteract(serverLevel, pos);
-		boolean onFire = entity.isOnFire() && mayInteract;
-		int effects = entity instanceof LivingEntity living && mayInteract
-				? living.getActiveEffects().size()
-				: 0;
+		boolean onFire = entity.isOnFire();
+		int effects = entity instanceof LivingEntity living ? living.getActiveEffects().size() : 0;
 		int charges = effects + (onFire ? 1 : 0);
 		if (charges == 0) {
 			return;
 		}
 		int fill = state.getValue(LEVEL);
-
 		int spent = Math.min(fill, charges);
 		if (onFire) {
 			entity.extinguishFire();
@@ -57,11 +48,9 @@ public class MilkCauldronBlock extends LayeredCauldronBlock {
 			((LivingEntity) entity).removeAllEffects();
 		}
 		level.setBlock(pos,
-				spent == fill
-						? Blocks.CAULDRON.defaultBlockState()
-						: state.setValue(LEVEL, fill - spent),
+				spent == fill ? Blocks.CAULDRON.defaultBlockState() : state.setValue(LEVEL, fill - spent),
 				Block.UPDATE_ALL);
-		level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+		level.playSound(null, pos, FundoSounds.MILK_BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
 		level.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
 	}
 }

@@ -55,6 +55,10 @@ public abstract class MidnightConfigButtonEntryMixin {
 
 			title.setMessage(Component.translatable(info.translationKey)
 					.setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN).withBold(true)));
+		} else if ("functionals".equals(info.fieldName)) {
+
+			title.setMessage(Component.translatable(info.translationKey)
+					.setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA).withBold(true)));
 		} else if ("compatibility".equals(info.fieldName)) {
 
 			title.setMessage(Component.translatable(info.translationKey)
@@ -91,10 +95,10 @@ public abstract class MidnightConfigButtonEntryMixin {
 
 	private static Identifier fundo$itemModel(String fieldName) {
 		return switch (fieldName) {
-			case "milk_changes" -> MilkBottleCompatibility.usesFarmersDelightBottle()
+			case "milk_additions" -> MilkBottleCompatibility.usesFarmersDelightBottle()
 					? MilkBottleCompatibility.FARMERS_DELIGHT_MILK_BOTTLE
 					: Identifier.fromNamespaceAndPath("fundo", "milk_bottle");
-			case "infinite_potions" -> Identifier.fromNamespaceAndPath("fundo", "echo_dust");
+			case "brewing_additions" -> Identifier.fromNamespaceAndPath("fundo", "echo_dust");
 			default -> null;
 		};
 	}

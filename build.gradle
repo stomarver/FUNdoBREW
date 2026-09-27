@@ -4,7 +4,7 @@ plugins {
 	id 'maven-publish'
 }
 
-version = "2-proof"
+version = "3-proof"
 
 repositories {
 	maven { url = 'https://maven.fabricmc.net/' }
@@ -23,8 +23,8 @@ loom {
 	}
 }
 
-// Only dependencies deliberately placed here are unpacked by Shadow. Runtime
-// mods and compileOnly APIs never enter this configuration.
+ 
+ 
 configurations {
 	fundoShadow {
 		canBeConsumed = false
@@ -39,37 +39,37 @@ dependencies {
 
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-	// MidnightLib is the one bundled dependency: Fabric Loader receives it as
-	// a Jar-in-Jar payload. It remains compile-only and local at development time.
+	 
+	 
 	compileOnly "maven.modrinth:midnightlib:wJeXgIoa"
 	include "maven.modrinth:midnightlib:wJeXgIoa"
 	localRuntime "maven.modrinth:midnightlib:wJeXgIoa"
 
-	// JEI and Mod Menu APIs are needed only to compile optional integrations.
-	// Their actual mod files, together with all other dev-only mods, are localRuntime.
+	 
+	 
 	compileOnly "maven.modrinth:u6dRKJwZ:CkeVHO6P"
 	compileOnly "maven.modrinth:mOgUt4GM:9DznhFoj"
 
-	// Latest 26.3 Fabric Modrinth files: JEI 31.7.0.38 and its required MezzConfig 0.6.3.
+	 
 	localRuntime "maven.modrinth:u6dRKJwZ:CkeVHO6P"
 	localRuntime "maven.modrinth:7tEfOcA7:k9NIYAoR"
 	localRuntime "maven.modrinth:mOgUt4GM:9DznhFoj"
 	localRuntime "maven.modrinth:eXts2L7r:lXytLqWj"
 	localRuntime "maven.modrinth:P9vIqP8R:HpEXV64p"
 	localRuntime "maven.modrinth:7vxePowz:hTNvMewX"
-	localRuntime "maven.modrinth:kp31625Q:1MyBcOQa"	//simple image renderer
+	localRuntime "maven.modrinth:kp31625Q:1MyBcOQa"	 
 }
 
 base {
 	archivesName = "fundo"
 }
 
-// Public Fabric artifact: <mod>_<mod version>+mc<Minecraft version>.
-// `1-proof` deliberately remains the project's pre-release identifier.
-def fundoJarName = { proj -> "${proj.base.archivesName.get()}_${proj.version}+mc${proj.minecraft_version}.jar" }
+ 
+ 
+def fundoJarName = { proj -> "${proj.base.archivesName.get()}_${proj.version}+263.jar" }
 
-// Loom's ordinary jar is the prepared input for Shadow: it contains the
-// transformed Fabric metadata and the MidnightLib Jar-in-Jar payload.
+ 
+ 
 tasks.named('jar') {
 	archiveFileName.set(fundoJarName(project).replace('.jar', '-dev.jar'))
 }
@@ -119,10 +119,10 @@ jar {
 	}
 }
 
-// Shadow 9.6.1 supports Gradle 9.7.1. Build from Loom's prepared dev JAR so
-// its transformed fabric.mod.json and Fabric Loader JIJ payload survive. Only
-// dependencies deliberately assigned to fundoShadow are additionally unpacked;
-// compileOnly and localRuntime APIs cannot enter the public artifact.
+ 
+ 
+ 
+ 
 tasks.named('shadowJar') {
 	dependsOn tasks.named('jar')
 	rootSpec.children.clear()

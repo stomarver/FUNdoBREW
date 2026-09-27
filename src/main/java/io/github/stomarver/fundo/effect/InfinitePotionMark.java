@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.github.stomarver.fundo.brewing.ExtendedPotionMark;
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -21,13 +22,13 @@ public final class InfinitePotionMark {
 	}
 
 	public static void mark(ItemStack stack) {
-		if (FundoConfig.infinite_potions) {
+		if (FundoFeaturePolicy.brewingAdditions()) {
 			CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> tag.putBoolean(KEY, true));
 		}
 	}
 
 	public static boolean isMarked(ItemStack stack) {
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			sanitizeIfDisabled(stack);
 			return false;
 		}
@@ -36,7 +37,7 @@ public final class InfinitePotionMark {
 	}
 
 	public static boolean isMarked(Entity entity) {
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			sanitizeIfDisabled(entity);
 			return false;
 		}
@@ -44,12 +45,12 @@ public final class InfinitePotionMark {
 		return data != null && data.copyTag().getBooleanOr(KEY, false);
 	}
 
-	/**
-	 * JEI's vanilla potion interpreter only keys on a registered potion holder.
-	 * Echoed potions intentionally use custom infinite effects instead, so give
-	 * marked stacks a stable subtype based on their complete component patch.
-	 * This also keeps resource-pack component variants distinct in JEI.
-	 */
+	 
+
+
+
+
+
 	public static Object jeiSubtype(ItemStack stack) {
 		if (!isMarked(stack)) {
 			return null;
@@ -61,7 +62,7 @@ public final class InfinitePotionMark {
 	}
 
 	public static void sanitizeIfDisabled(ItemStack stack) {
-		if (FundoConfig.infinite_potions || stack.isEmpty()) {
+		if (FundoFeaturePolicy.brewingAdditions() || stack.isEmpty()) {
 			return;
 		}
 		CustomData data = stack.get(DataComponents.CUSTOM_DATA);
@@ -87,7 +88,7 @@ public final class InfinitePotionMark {
 	}
 
 	public static void sanitizeIfDisabled(Entity entity) {
-		if (FundoConfig.infinite_potions) {
+		if (FundoFeaturePolicy.brewingAdditions()) {
 			return;
 		}
 		CustomData data = entity.get(DataComponents.CUSTOM_DATA);

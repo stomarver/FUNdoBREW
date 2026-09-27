@@ -12,8 +12,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 
 import io.github.stomarver.fundo.particle.FundoParticles;
+import io.github.stomarver.fundo.sound.FundoSounds;
 
-/** Server-side version of vanilla's potion-break level events at an exact hit point. */
+ 
 public final class PotionImpactEffects {
 
 	private PotionImpactEffects() {
@@ -55,7 +56,7 @@ public final class PotionImpactEffects {
 	public static void milkBottle(ServerLevel level, Vec3 impact) {
 		level.sendParticles(FundoParticles.MILK_SPLASH, impact.x, impact.y + 0.2D, impact.z,
 				35, 0.025D, 0.025D, 0.025D, 0.0D);
-		level.playSound(null, impact.x, impact.y, impact.z, SoundEvents.SPLASH_POTION_BREAK,
-				SoundSource.NEUTRAL, 1.0F, 0.9F + level.getRandom().nextFloat() * 0.1F);
+		level.playSound(null, impact.x, impact.y, impact.z, FundoSounds.MILK_BOTTLE_BREAK,
+					SoundSource.NEUTRAL, 1.0F, 0.9F + level.getRandom().nextFloat() * 0.1F);
 	}
 }

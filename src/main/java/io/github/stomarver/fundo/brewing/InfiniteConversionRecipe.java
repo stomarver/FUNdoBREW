@@ -20,6 +20,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.effect.InfinitePotionMark;
 
 import java.util.Optional;
@@ -62,7 +63,7 @@ public final class InfiniteConversionRecipe extends BrewingRecipe {
 
 	@Override
 	public boolean matches(BrewingInput input, Level level) {
-		if (!FundoConfig.infinite_potions || !input.reagent().is(this.reagentItem) || !input.input().is(this.from)) {
+		if (!FundoFeaturePolicy.brewingAdditions() || !input.reagent().is(this.reagentItem) || !input.input().is(this.from)) {
 			return false;
 		}
 
@@ -72,7 +73,7 @@ public final class InfiniteConversionRecipe extends BrewingRecipe {
 	@Override
 	public ItemStack assemble(BrewingInput input) {
 
-		// transmuteCopy carries the complete component patch into the new potion container.
+		 
 		return input.input().transmuteCopy(this.to, 1);
 	}
 

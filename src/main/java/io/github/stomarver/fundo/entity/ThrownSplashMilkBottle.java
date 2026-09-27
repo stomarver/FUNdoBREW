@@ -1,7 +1,6 @@
 package io.github.stomarver.fundo.entity;
 
 import io.github.stomarver.fundo.advancement.FundoAdvancements;
-import io.github.stomarver.fundo.config.FundoConfig;
 import io.github.stomarver.fundo.debug.ActionLogs;
 import io.github.stomarver.fundo.debug.PotionActionLog;
 
@@ -49,10 +48,6 @@ public class ThrownSplashMilkBottle extends ThrownSplashPotion {
 
 	@Override
 	public void onHitAsPotion(ServerLevel level, ItemStack stack, HitResult hitResult) {
-		if (!FundoConfig.milk_changes) {
-			return;
-		}
-
 		AABB impactBox = this.getBoundingBox().move(hitResult.getLocation().subtract(this.position()));
 		PotionHitboxes.Sphere impact = PotionHitboxes.Sphere.ofCenter(
 				impactBox.getCenter(), PotionHitboxes.MILK_SPLASH_WIDTH);

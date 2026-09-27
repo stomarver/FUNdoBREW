@@ -33,7 +33,8 @@ public abstract class AreaEffectCloudPotionActionLogMixin {
 		if (!fundo$potionLogSeen) {
 			fundo$potionLogSeen = true;
 			String event = "cloud spawned/observed | cloud=" + ActionLogs.subject(self)
-					+ " shape=cylinder radius=" + self.getRadius() + " height=" + PotionHitboxes.CLOUD_HEIGHT
+					+ " shape=cylinder radius=" + PotionHitboxes.cloudCylinder(self).radius()
+					+ " height=" + PotionHitboxes.cloudCylinder(self).height()
 					+ " wait=" + self.getWaitTime() + " duration=" + self.getDuration()
 					+ " radius-per-tick=" + self.getRadiusPerTick()
 					+ " radius-on-use=" + self.getRadiusOnUse()
@@ -60,14 +61,15 @@ public abstract class AreaEffectCloudPotionActionLogMixin {
 		if (fundo$potionLogWaiting != self.isWaiting()) {
 			String event = "cloud state | cloud=" + ActionLogs.subject(self)
 					+ " waiting=" + fundo$potionLogWaiting + " -> " + self.isWaiting()
-					+ " shape=cylinder radius=" + self.getRadius() + " height=" + PotionHitboxes.CLOUD_HEIGHT;
+					+ " shape=cylinder radius=" + PotionHitboxes.cloudCylinder(self).radius()
+					+ " height=" + PotionHitboxes.cloudCylinder(self).height();
 			ActionLogs.potions(level, event);
 			fundo$mirrorInfiniteLifecycle(level, self, event);
 		}
 		if (Float.compare(fundo$potionLogRadius, self.getRadius()) != 0) {
 			String event = "cloud radius | cloud=" + ActionLogs.subject(self)
-					+ " shape=cylinder radius=" + fundo$potionLogRadius + " -> " + self.getRadius()
-					+ " height=" + PotionHitboxes.CLOUD_HEIGHT + " duration="
+					+ " shape=cylinder radius=" + fundo$potionLogRadius + " -> " + PotionHitboxes.cloudCylinder(self).radius()
+					+ " height=" + PotionHitboxes.cloudCylinder(self).height() + " duration="
 					+ fundo$potionLogDuration + " -> " + self.getDuration();
 			ActionLogs.potions(level, event);
 			fundo$mirrorInfiniteLifecycle(level, self, event);

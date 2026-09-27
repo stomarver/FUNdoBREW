@@ -16,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.alchemy.PotionContents;
 
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.debug.ActionLogs;
 import io.github.stomarver.fundo.effect.InfiniteEffects;
 import io.github.stomarver.fundo.effect.InfinitePotionMark;
@@ -25,7 +26,7 @@ public abstract class InfiniteCloudTagMixin {
 
 	@Inject(method = "tick", at = @At("HEAD"))
 	private void fundo$retireLegacyCloudPayloadBeforeVanilla(CallbackInfo ci) {
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			InfinitePotionMark.sanitizeIfDisabled((AreaEffectCloud) (Object) this);
 		}
 	}
@@ -33,7 +34,7 @@ public abstract class InfiniteCloudTagMixin {
 	@Inject(method = "tick", at = @At("TAIL"))
 	private void fundo$tagInfiniteCloudVictims(CallbackInfo ci) {
 		AreaEffectCloud self = (AreaEffectCloud) (Object) this;
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			InfinitePotionMark.sanitizeIfDisabled(self);
 			return;
 		}

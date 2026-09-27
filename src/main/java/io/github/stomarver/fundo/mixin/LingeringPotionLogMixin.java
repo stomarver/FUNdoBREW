@@ -13,6 +13,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.phys.HitResult;
 
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.debug.ActionLogs;
 import io.github.stomarver.fundo.effect.InfiniteEffects;
 import io.github.stomarver.fundo.effect.InfinitePotionMark;
@@ -23,7 +24,7 @@ public abstract class LingeringPotionLogMixin {
 	@Inject(method = "onHitAsPotion(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/phys/HitResult;)V",
 			at = @At("TAIL"))
 	private void fundo$logLingeringHit(ServerLevel level, ItemStack potionItem, HitResult hitResult, CallbackInfo ci) {
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			return;
 		}
 		PotionContents contents = potionItem.get(DataComponents.POTION_CONTENTS);

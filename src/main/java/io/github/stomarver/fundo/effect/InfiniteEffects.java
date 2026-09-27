@@ -240,13 +240,13 @@ public final class InfiniteEffects {
 		return false;
 	}
 
-	/**
-	 * Grants a command-created Fundo row and immediately materializes its matching
-	 * infinite instance. A row alone is not enough: an older infinite instance in
-	 * the vanilla chain would otherwise prevent {@link #sync(LivingEntity)} from
-	 * applying the new amplifier. The command's hide-particles choice is retained
-	 * on the materialized instance.
-	 */
+	 
+
+
+
+
+
+
 	public static boolean grant(LivingEntity entity, Holder<MobEffect> effect, int amplifier,
 			boolean hideParticles) {
 		mirrorTag(entity, effect, amplifier);
@@ -254,11 +254,11 @@ public final class InfiniteEffects {
 		return hasActiveMatch(entity, effect, amplifier);
 	}
 
-	/**
-	 * A Fundo row is active only when the visible infinite instance has its exact
-	 * amplifier. A different visible infinite instance is a vanilla cover, even
-	 * though it has the same effect holder and an infinite duration.
-	 */
+	 
+
+
+
+
 	private static boolean hasActiveMatch(LivingEntity entity, Holder<MobEffect> effect, int amplifier) {
 		MobEffectInstance current = entity.getEffect(effect);
 		return current != null && current.isInfiniteDuration() && current.getAmplifier() == amplifier;

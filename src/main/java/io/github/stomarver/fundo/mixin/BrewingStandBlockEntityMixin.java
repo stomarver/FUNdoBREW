@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
 
 import io.github.stomarver.fundo.brewing.ExtendedPotionMark;
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.debug.ActionLogs;
 import io.github.stomarver.fundo.debug.PotionActionLog;
 import io.github.stomarver.fundo.effect.InfinitePotionMark;
@@ -25,7 +26,7 @@ public class BrewingStandBlockEntityMixin {
 			at = @At(value = "INVOKE", target = "Ljava/lang/Math;ceil(D)D"),
 			index = 0)
 	private static double fundo$applyBrewingSpeedMultiplier(double vanillaBrewDuration) {
-		return vanillaBrewDuration / FundoConfig.brewingSpeedMultiplier();
+		return vanillaBrewDuration / FundoFeaturePolicy.brewingSpeedMultiplier();
 	}
 
 	@Inject(method = "doBrew", at = @At("TAIL"))

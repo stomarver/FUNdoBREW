@@ -1,6 +1,5 @@
 package io.github.stomarver.fundo.entity;
 
-import io.github.stomarver.fundo.config.FundoConfig;
 import io.github.stomarver.fundo.debug.ActionLogs;
 import io.github.stomarver.fundo.debug.PotionActionLog;
 
@@ -37,10 +36,6 @@ public class MilkCleansingCloud extends AreaEffectCloud {
 	public void tick() {
 		super.tick();
 		Level level = this.level();
-		if (!FundoConfig.milk_changes) {
-			this.discard();
-			return;
-		}
 		if (level.isClientSide() || !this.isAlive() || this.isWaiting()) {
 			return;
 		}
@@ -63,7 +58,7 @@ public class MilkCleansingCloud extends AreaEffectCloud {
 			if (ActionLogs.potionsEnabled()) {
 				ActionLogs.potions(level, "cloud radius | cloud=" + ActionLogs.subject(this)
 						+ " shape=cylinder radius=" + oldRadius + " -> " + newRadius
-						+ " height=" + PotionHitboxes.CLOUD_HEIGHT + " cause=milk-cleansing"
+						+ " height=" + PotionHitboxes.cloudCylinder(this).height() + " cause=milk-cleansing"
 						+ " effects-removed=" + effectsRemoved + " pos=" + PotionActionLog.position(this.position()));
 			}
 			if (newRadius < 0.5F) {

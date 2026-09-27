@@ -1,0 +1,86 @@
+{
+  "milk_ambient": {
+    "subtitle": "subtitles.fundo.milk_ambient",
+    "sounds": [
+      { "name": "minecraft:ambient.underwater.loop", "type": "event" }
+    ]
+  },
+  "milk_bucket_fill": {
+    "subtitle": "subtitles.fundo.milk_bucket_fill",
+    "sounds": [
+      { "name": "minecraft:item.bucket.fill", "type": "event" }
+    ]
+  },
+  "milk_bucket_empty": {
+    "subtitle": "subtitles.fundo.milk_bucket_empty",
+    "sounds": [
+      { "name": "minecraft:item.bucket.empty", "type": "event" }
+    ]
+  },
+  "milk_bottle_fill": {
+    "subtitle": "subtitles.fundo.milk_bottle_fill",
+    "sounds": [
+      { "name": "minecraft:item.bottle.fill", "type": "event" }
+    ]
+  },
+  "milk_bottle_empty": {
+    "subtitle": "subtitles.fundo.milk_bottle_empty",
+    "sounds": [
+      { "name": "minecraft:item.bottle.empty", "type": "event" }
+    ]
+  },
+  "milk_drip": {
+    "subtitle": "subtitles.fundo.milk_drip",
+    "sounds": [
+      { "name": "minecraft:block.pointed_dripstone.drip_water", "type": "event" }
+    ]
+  },
+  "milk_bottle_break": {
+    "subtitle": "subtitles.fundo.milk_bottle_break",
+    "sounds": [
+      { "name": "minecraft:entity.splash_potion.break", "type": "event" }
+    ]
+  },
+  "milk_ice_break": {
+    "subtitle": "subtitles.fundo.milk_ice_break",
+    "sounds": [
+      { "name": "minecraft:block.glass.break", "type": "event" }
+    ]
+  },
+  "milk_ice_step": {
+    "subtitle": "subtitles.fundo.milk_ice_step",
+    "sounds": [
+      { "name": "minecraft:block.glass.step", "type": "event" }
+    ]
+  },
+  "milk_ice_place": {
+    "subtitle": "subtitles.fundo.milk_ice_place",
+    "sounds": [
+      { "name": "minecraft:block.glass.place", "type": "event" }
+    ]
+  },
+  "milk_ice_hit": {
+    "subtitle": "subtitles.fundo.milk_ice_hit",
+    "sounds": [
+      { "name": "minecraft:block.glass.hit", "type": "event" }
+    ]
+  },
+  "milk_ice_fall": {
+    "subtitle": "subtitles.fundo.milk_ice_fall",
+    "sounds": [
+      { "name": "minecraft:block.glass.fall", "type": "event" }
+    ]
+  },
+  "milk_ice_form": {
+    "subtitle": "subtitles.fundo.milk_ice_form",
+    "sounds": [
+      { "name": "minecraft:block.glass.place", "type": "event" }
+    ]
+  },
+  "milk_ice_melt": {
+    "subtitle": "subtitles.fundo.milk_ice_melt",
+    "sounds": [
+      { "name": "minecraft:block.glass.break", "type": "event" }
+    ]
+  }
+}

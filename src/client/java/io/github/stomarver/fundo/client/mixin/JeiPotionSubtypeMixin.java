@@ -12,11 +12,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import io.github.stomarver.fundo.effect.InfinitePotionMark;
 
-/**
- * JEI identifies ordinary potion stacks by PotionContents#potion. Echoed
- * potions deliberately have no finite potion holder, so JEI would otherwise
- * collapse every infinite potion into its uncraftable-potion subtype.
- */
+ 
+
+
+
+
 @Pseudo
 @Mixin(targets = "mezz.jei.library.plugins.vanilla.ingredients.subtypes.PotionSubtypeInterpreter", remap = false)
 public abstract class JeiPotionSubtypeMixin {

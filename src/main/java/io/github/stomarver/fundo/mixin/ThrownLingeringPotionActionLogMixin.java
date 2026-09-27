@@ -34,7 +34,7 @@ public abstract class ThrownLingeringPotionActionLogMixin {
 			position = target.position();
 		}
 		String event = "entity -> cloud | " + PotionActionLog.projectile(self) + " | "
-				+ PotionActionLog.hit(hit) + " shape=cylinder radius=3.0 height=" + PotionHitboxes.CLOUD_HEIGHT
+				+ PotionActionLog.hit(hit) + " shape=cylinder initial-radius=3.0"
 				+ " cloud-pos=" + PotionActionLog.position(position) + " | " + PotionActionLog.describe(stack);
 		ActionLogs.potions(level, event);
 		if (InfinitePotionMark.isMarked(stack)) {

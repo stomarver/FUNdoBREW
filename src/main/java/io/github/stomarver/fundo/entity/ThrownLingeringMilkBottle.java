@@ -1,7 +1,6 @@
 package io.github.stomarver.fundo.entity;
 
 import io.github.stomarver.fundo.advancement.FundoAdvancements;
-import io.github.stomarver.fundo.config.FundoConfig;
 import io.github.stomarver.fundo.debug.ActionLogs;
 import io.github.stomarver.fundo.debug.PotionActionLog;
 
@@ -49,10 +48,6 @@ public class ThrownLingeringMilkBottle extends ThrownLingeringPotion {
 
 	@Override
 	public void onHitAsPotion(ServerLevel level, ItemStack stack, HitResult hitResult) {
-		if (!FundoConfig.milk_changes) {
-			return;
-		}
-
 		double cloudX = this.getX();
 		double cloudY = this.getY();
 		double cloudZ = this.getZ();

@@ -19,16 +19,21 @@ public final class PotionHitboxes {
 
 	public static final double MILK_SPLASH_WIDTH = 2.5D;
 
-	public static final double CLOUD_HEIGHT = AreaEffectCloud.HEIGHT;
-
 	public static final double MAX_CLOUD_RADIUS = 32.0D;
 
+	 
+
+
+
+
 	public static Cylinder cloudCylinder(AreaEffectCloud cloud) {
-		return new Cylinder(cloud.getX(), cloud.getY(), cloud.getZ(), cloud.getRadius(), CLOUD_HEIGHT);
+		AABB bounds = cloud.getBoundingBox();
+		double radius = Math.max(bounds.getXsize(), bounds.getZsize()) / 2.0D;
+		return new Cylinder(cloud.getX(), bounds.minY, cloud.getZ(), radius, bounds.getYsize());
 	}
 
 	public static AABB cloudCandidateBox(AABB subject) {
-		return subject.inflate(MAX_CLOUD_RADIUS, CLOUD_HEIGHT, MAX_CLOUD_RADIUS);
+		return subject.inflate(MAX_CLOUD_RADIUS, MAX_CLOUD_RADIUS, MAX_CLOUD_RADIUS);
 	}
 
 	public record Cylinder(double centerX, double baseY, double centerZ, double radius, double height) {

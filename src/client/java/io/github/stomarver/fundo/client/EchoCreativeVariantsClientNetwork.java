@@ -20,12 +20,16 @@ public final class EchoCreativeVariantsClientNetwork {
 		ClientPlayNetworking.registerGlobalReceiver(EchoCreativeVariantsPayload.TYPE, (payload, context) ->
 				context.client().execute(() -> {
 					ExtendedPotionIndex.installCreativeSources(payload.sources());
-					fundo$rebuildTabs(context.client());
-
-					if (FabricLoader.getInstance().isModLoaded("jei")) {
-						fundo$refreshJeiContractRows();
-					}
+					refreshPresentation(context.client());
 				}));
+	}
+
+	 
+	public static void refreshPresentation(Minecraft minecraft) {
+		fundo$rebuildTabs(minecraft);
+		if (FabricLoader.getInstance().isModLoaded("jei")) {
+			fundo$refreshJeiContractRows();
+		}
 	}
 
 	private static void fundo$refreshJeiContractRows() {

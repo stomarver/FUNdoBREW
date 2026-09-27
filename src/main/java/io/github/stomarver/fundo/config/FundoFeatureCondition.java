@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditionType;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.minecraft.resources.RegistryOps;
 
+ 
 public record FundoFeatureCondition(Feature feature) implements ResourceCondition {
 
 	public static final ResourceConditionType<FundoFeatureCondition> TYPE = ResourceConditionType.create(
@@ -33,28 +34,28 @@ public record FundoFeatureCondition(Feature feature) implements ResourceConditio
 	}
 
 	public enum Feature {
-		MILK_CHANGES("milk_changes") {
+		MILK_ADDITIONS("milk_additions") {
 			@Override
 			boolean isEnabled() {
-				return FundoConfig.milk_changes;
+				return FundoFeaturePolicy.milkAdditions();
 			}
 		},
 		NATIVE_MILK_BOTTLE("native_milk_bottle") {
 			@Override
 			boolean isEnabled() {
-				return FundoConfig.milk_changes && !MilkBottleCompatibility.usesFarmersDelightBottle();
+				return FundoFeaturePolicy.milkAdditions() && !MilkBottleCompatibility.usesFarmersDelightBottle();
 			}
 		},
 		FARMERS_DELIGHT_MILK_BOTTLE("farmers_delight_milk_bottle") {
 			@Override
 			boolean isEnabled() {
-				return FundoConfig.milk_changes && MilkBottleCompatibility.usesFarmersDelightBottle();
+				return FundoFeaturePolicy.milkAdditions() && MilkBottleCompatibility.usesFarmersDelightBottle();
 			}
 		},
-		INFINITE_POTIONS("infinite_potions") {
+		BREWING_ADDITIONS("brewing_additions") {
 			@Override
 			boolean isEnabled() {
-				return FundoConfig.infinite_potions;
+				return FundoFeaturePolicy.brewingAdditions();
 			}
 		};
 
@@ -71,12 +72,20 @@ public record FundoFeatureCondition(Feature feature) implements ResourceConditio
 		}
 
 		static Feature fromSerializedName(String name) {
-			for (Feature feature : values()) {
-				if (feature.serializedName.equals(name)) {
-					return feature;
+			return switch (name) {
+				 
+				 
+				case "milk_changes" -> MILK_ADDITIONS;
+				case "infinite_potions" -> BREWING_ADDITIONS;
+				default -> {
+					for (Feature feature : values()) {
+						if (feature.serializedName.equals(name)) {
+							yield feature;
+						}
+					}
+					throw new IllegalArgumentException("Unknown FUNdoBREW feature condition: " + name);
 				}
-			}
-			throw new IllegalArgumentException("Unknown FUNdoBREW feature condition: " + name);
+			};
 		}
 	}
 }

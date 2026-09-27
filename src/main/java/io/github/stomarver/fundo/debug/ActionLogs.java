@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import io.github.stomarver.fundo.Fundo;
 import io.github.stomarver.fundo.config.ActionLogMode;
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 
 public final class ActionLogs {
 
@@ -29,7 +30,7 @@ public final class ActionLogs {
 			.withZone(ZoneId.systemDefault());
 
 	private static final Stream INFINITE = new Stream(
-			"fundo_infinite.log", "fundo/infinite", () -> FundoConfig.infinite_potions
+			"fundo_infinite.log", "fundo/infinite", () -> FundoFeaturePolicy.brewingAdditions()
 					&& FundoConfig.infinite_effect_actions_log != ActionLogMode.DISABLED,
 			() -> FundoConfig.infinite_effect_actions_log);
 	private static final Stream POTIONS = new Stream(
@@ -69,11 +70,11 @@ public final class ActionLogs {
 		worldName = "";
 	}
 
-	/**
-	 * Applies the current log settings to the running server session. A newly
-	 * enabled stream starts immediately; a disabled stream closes its writer
-	 * immediately. Re-enabling a stream appends to its current world session.
-	 */
+	 
+
+
+
+
 	public static synchronized void refresh() {
 		if (!sessionOpen || sessionLevel == null) {
 			return;

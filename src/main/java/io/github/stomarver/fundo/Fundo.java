@@ -20,15 +20,15 @@ import io.github.stomarver.fundo.brewing.ExtendedPotionIndex;
 import io.github.stomarver.fundo.brewing.FundoBrewing;
 import io.github.stomarver.fundo.config.FundoConfig;
 import io.github.stomarver.fundo.config.FundoFeatureCondition;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.debug.ActionLogs;
-import io.github.stomarver.fundo.migration.FundoContentMigration;
 import io.github.stomarver.fundo.entity.FundoEntityTypes;
 import io.github.stomarver.fundo.fluid.FundoFluids;
 import io.github.stomarver.fundo.item.FundoItems;
 import io.github.stomarver.fundo.network.EchoCreativeVariantsNetwork;
 import io.github.stomarver.fundo.network.PotionHitboxImpactNetwork;
-import io.github.stomarver.fundo.network.PotionStackingNetwork;
 import io.github.stomarver.fundo.particle.FundoParticles;
+import io.github.stomarver.fundo.sound.FundoSounds;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 
@@ -45,9 +45,10 @@ public class Fundo implements ModInitializer {
 		FundoFeatureCondition.register();
 
 		PotionHitboxImpactNetwork.registerPayload();
-		PotionStackingNetwork.registerPayload();
+		FundoFeaturePolicy.registerPayload();
 		EchoCreativeVariantsNetwork.registerPayload();
 
+		FundoSounds.register();
 		FundoFluids.register();
 		FundoBlocks.register();
 		FundoItems.register();
@@ -55,7 +56,6 @@ public class Fundo implements ModInitializer {
 		FundoBrewing.register();
 		FundoParticles.register();
 		FundoEntityTypes.register();
-		FundoContentMigration.register();
 
 		ServerLevelEvents.LOAD.register((server, world) -> {
 			if (world.dimension() == Level.OVERWORLD) {
@@ -80,16 +80,19 @@ public class Fundo implements ModInitializer {
 			ActionLogs.potions(server.overworld(), "world | saved (flush=" + flush + ")");
 		});
 
-		// Deferred registry lookup keeps optional Farmer's Delight integration independent of initializer order.
+		 
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> FundoCauldronInteractions.register());
 
-		ServerLifecycleEvents.SERVER_STARTED.register(server ->
-				ExtendedPotionIndex.refresh(server.getRecipeManager()));
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			FundoFeaturePolicy.serverStarted(server);
+			ExtendedPotionIndex.refresh(server.getRecipeManager());
+		});
+		ServerLifecycleEvents.SERVER_STOPPED.register(FundoFeaturePolicy::serverStopped);
 		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) ->
 				ExtendedPotionIndex.refresh(server.getRecipeManager()));
 
 		ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> {
-			PotionStackingNetwork.sync(player);
+			FundoFeaturePolicy.sync(player);
 			EchoCreativeVariantsNetwork.sync(player);
 		});
 

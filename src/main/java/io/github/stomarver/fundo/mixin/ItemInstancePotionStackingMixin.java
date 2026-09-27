@@ -10,20 +10,22 @@ import net.minecraft.world.item.ItemStack;
 
 import io.github.stomarver.fundo.item.PotionStacking;
 
-@Mixin(ItemInstance.class)
+ 
+
+
+
+
+@Mixin(value = ItemInstance.class, priority = 500)
 public interface ItemInstancePotionStackingMixin {
 
 	@Inject(method = "getMaxStackSize", at = @At("RETURN"), cancellable = true)
-	private void fundo$applyPotionStackingPolicy(CallbackInfoReturnable<Integer> cir) {
-		if (!((Object) this instanceof ItemStack stack) || !PotionStacking.isUnmodifiedVanillaPotion(stack)) {
+	private void fundo$applyPotionStackingFallback(CallbackInfoReturnable<Integer> cir) {
+		if (!PotionStacking.enabled()
+				|| !((Object) this instanceof ItemStack stack)
+				|| !PotionStacking.isUnmodifiedVanillaPotion(stack)
+				|| cir.getReturnValue() != 1) {
 			return;
 		}
-		if (!PotionStacking.enabled()) {
-			stack.setCount(PotionStacking.limitCount(stack, stack.getCount()));
-			return;
-		}
-		if (cir.getReturnValue() == 1) {
-			cir.setReturnValue(16);
-		}
+		cir.setReturnValue(16);
 	}
 }

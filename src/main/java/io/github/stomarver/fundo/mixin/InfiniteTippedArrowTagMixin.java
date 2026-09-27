@@ -15,21 +15,22 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
 
 import io.github.stomarver.fundo.config.FundoConfig;
+import io.github.stomarver.fundo.config.FundoFeaturePolicy;
 import io.github.stomarver.fundo.debug.ActionLogs;
 import io.github.stomarver.fundo.effect.InfiniteEffects;
 import io.github.stomarver.fundo.effect.InfinitePotionMark;
 
-/** Applies Fundo infinite provenance after vanilla has applied a tipped arrow's effects. */
+ 
 @Mixin(Arrow.class)
 public abstract class InfiniteTippedArrowTagMixin {
 
-	/**
-	 * A legacy marked arrow can still be in flight when Infinite Potions is
-	 * disabled. Remove its endless payload before Arrow's vanilla effect loop.
-	 */
+	 
+
+
+
 	@Inject(method = "doPostHurtEffects(Lnet/minecraft/world/entity/LivingEntity;)V", at = @At("HEAD"))
 	private void fundo$retireDisabledInfiniteArrow(LivingEntity victim, CallbackInfo ci) {
-		if (!FundoConfig.infinite_potions) {
+		if (!FundoFeaturePolicy.brewingAdditions()) {
 			InfinitePotionMark.sanitizeIfDisabled(((Arrow) (Object) this).getPickupItemStackOrigin());
 		}
 	}
@@ -37,7 +38,7 @@ public abstract class InfiniteTippedArrowTagMixin {
 	@Inject(method = "doPostHurtEffects(Lnet/minecraft/world/entity/LivingEntity;)V", at = @At("TAIL"))
 	private void fundo$tagInfiniteArrowVictim(LivingEntity victim, CallbackInfo ci) {
 		Arrow self = (Arrow) (Object) this;
-		if (!FundoConfig.infinite_potions || self.level().isClientSide()) {
+		if (!FundoFeaturePolicy.brewingAdditions() || self.level().isClientSide()) {
 			return;
 		}
 
